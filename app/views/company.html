@@ -1,0 +1,37 @@
+<div class="btn-group" role="group" aria-label="...">
+    <a href="#/new" class="btn btn-link">Add</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <td>#</td>
+        <td>Name</td>
+        <td>Address</td>
+        <td>Contact Details</td>
+        <td>Owners</td>
+    </thead>
+    <tbody>
+        <tr ng-repeat="company in companies">
+            <td>{{ company.id }}</td>
+            <td><a href="#/view/{{company.id}}" class="thumb"><strong>{{ company.name }}</strong></a></td>
+            <td>
+                <address>
+                    {{ company.address }}<br>
+                    {{ company.city }}, {{ company.country }}<br>
+                </address>
+            </td>
+            <td>
+                <address>
+                    <div ng-if="company.phone_number"><abbr title="Phone">P:</abbr> {{ company.phone_number }}<br/></div>
+                    <a href="mailto:#">{{ company.email }}</a>
+                </address><br/></td>
+            <td>
+                <ul class="list-unstyled">
+                    <li ng-repeat="owner in company.owners">
+                        {{ owner.name }}
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

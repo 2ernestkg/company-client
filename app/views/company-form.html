@@ -1,0 +1,66 @@
+<form role="form" name="companyForm" class="form-horizontal">
+    <div class="row">
+        <div class="form-group" ng-class="{error: companyForm.name.$invalid}">
+            <label class="col-md-2"> Name </label>
+            <div class="col-md-4">
+                <input name="name" data-ng-model="company.name" type="text" class="form-control" required/>
+                <span ng-show="companyForm.name.$dirty && companyForm.name.$invalid" class="help-inline">Name Required</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{error: companyForm.address.$invalid}">
+            <label class="col-md-2"> Address </label>
+            <div class="col-md-4">
+                <input name="address" data-ng-model="company.address" type="text" class="form-control" required/>
+                <span ng-show="companyForm.address.$dirty && companyForm.address.$invalid" class="help-inline">Address Required</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{error: companyForm.city.$invalid}">
+            <label class="col-md-2"> City </label>
+            <div class="col-md-4">
+                <input name="city" data-ng-model="company.city" type="text" class="form-control" required/>
+                <span ng-show="companyForm.city.$dirty && companyForm.city.$invalid" class="help-inline">City Required</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{error: companyForm.country.$invalid}">
+            <label class="col-md-2"> Country </label>
+            <div class="col-md-4">
+                <input name="country" data-ng-model="company.country" type="text" class="form-control" required/>
+                <span ng-show="companyForm.country.$dirty && companyForm.country.$invalid" class="help-inline">Country Required</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2"> Phone Number </label>
+            <div class="col-md-4">
+                <input name="phone_number" data-ng-model="company.phone_number" type="text" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2"> Email </label>
+            <div class="col-md-4">
+                <input name="email" data-ng-model="company.email" type="text" class="form-control"/>
+            </div>
+        </div>
+        <div id="Add Owner">
+            <div class="input-group">
+                <input name="owner.name" data-ng-model="newOwner.name" type="text" class="form-control" placeholder="Owner Name">
+                  <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" ng-click="addOwner(newOwner)">Add</button>
+                  </span>
+            </div>
+        </div>
+        <div id="owners">
+            <ul class="list-unstyled">
+                <li ng-repeat="owner in company.owners">
+                    {{ owner.name }} <a class="glyphicon glyphicon-trash" ng-click="delOwner($index)"></a>
+                </li>
+            </ul>
+        </div>
+        <div class= "form-group">
+            <label class= "col-md-2"></label>
+            <div class="col-md-4">
+                <a href="#/" class="btn">Cancel</a>
+                <input type="submit" class="btn btn-primary" ng-disabled="companyForm.$invalid" value="Save"/>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="#/">List</a></li>
+    <li><a href="#/edit/{{company.id}}" class="btn btn-primary">Edit</a></li>
+</ul>
+<div class="row">
+    {{ company.name }}
+    <address>
+        {{ company.address }}<br>
+        {{ company.city }}, {{ company.country }}<br>
+        <div ng-if="company.phone_number"><abbr title="Phone">P:</abbr> {{ company.phone_number }}<br/></div>
+        <a href="mailto:#">{{ company.email }}</a>
+    </address>
+    Owners:<br/>
+    <div id="Add Owner">
+        <form role="ownerForm">
+            <div class="input-group">
+                <input name="owner.name" data-ng-model="owner.name" type="text" class="form-control" placeholder="Owner Name">
+                  <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" ng-click="addOwner(owner)">Add</button>
+                  </span>
+            </div>
+        </form>
+    </div>
+    <div ng-repeat="owner in company.owners" class="col-xs-6 col-md-3">
+        {{ owner.name }}
+    </div>
+</div>
