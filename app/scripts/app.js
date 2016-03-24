@@ -15,14 +15,14 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngMaterial',
+    'md.data.table'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/company.html',
         controller: 'CompanyCtrl',
-        controllerAs: 'company'
       })
       .when('/view/:id', {
         templateUrl: 'views/company-detail.html',

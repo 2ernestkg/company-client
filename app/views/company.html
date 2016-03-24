@@ -2,30 +2,33 @@
     <a href="#/new" class="btn btn-link">Add</a>
 </div>
 
-<table class="table table-striped">
-    <thead>
-        <td>#</td>
-        <td>Name</td>
-        <td>Address</td>
-        <td>Contact Details</td>
-        <td>Owners</td>
-    </thead>
-    <tbody>
-        <tr ng-repeat="company in companies">
-            <td>{{ company.id }}</td>
-            <td><a href="#/view/{{company.id}}" class="thumb"><strong>{{ company.name }}</strong></a></td>
-            <td>
+<md-table-container>
+    <table md-table md-progress="promise">
+        <thead md-head md-order="query.order" md-on-reorder="onReorder">
+        <tr md-row>
+            <th md-column>#</th>
+            <th md-column>Name</th>
+            <th md-column>Address</th>
+            <th md-column>Contact Details</th>
+            <th md-column>Owners</th>
+        </tr>
+        </thead>
+        <tbody md-body>
+        <tr md-row md-auto-select ng-repeat="company in companies.data">
+            <td md-cell>{{ company.id }}</td>
+            <td md-cell><a href="#/view/{{company.id}}" class="thumb"><strong>{{ company.name }}</strong></a></td>
+            <td md-cell>
                 <address>
                     {{ company.address }}<br>
                     {{ company.city }}, {{ company.country }}<br>
                 </address>
             </td>
-            <td>
+            <td md-cell>
                 <address>
                     <div ng-if="company.phone_number"><abbr title="Phone">P:</abbr> {{ company.phone_number }}<br/></div>
                     <a href="mailto:#">{{ company.email }}</a>
                 </address><br/></td>
-            <td>
+            <td md-cell>
                 <ul class="list-unstyled">
                     <li ng-repeat="owner in company.owners">
                         {{ owner.name }}
@@ -33,5 +36,8 @@
                 </ul>
             </td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</md-table-container>
+
+<md-table-pagination md-limit="query.limit" md-page="query.page" md-on-paginate="onPaginate" md-total="{{companies.counts}}" md-page-select></md-table-pagination>

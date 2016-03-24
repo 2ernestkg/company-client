@@ -11,8 +11,34 @@ function notifyError(response) {
   }
 }
 var app = angular.module('projectsApp');
-app.controller('CompanyCtrl', ['$scope', 'Company', function ($scope, Company) {
-  $scope.companies = Company.query();
+app.controller('CompanyCtrl', ['$scope', '$resource', 'Company', function ($scope, $resource, Company) {
+  var resource = $resource('http://127.0.0.1:8080/company', {}, {
+      get: {method: 'GET'}
+  });
+
+  $scope.query = {
+    order: 'id',
+    limit: 5,
+    page: 1
+  };
+
+  getCompanies($scope.query);
+
+  function getCompanies(query) {
+    $scope.promise = resource.get(query, success).$promise;
+  }
+
+  function success(result) {
+    $scope.companies = result;
+  }
+
+  $scope.onPaginate = function (page, limit) {
+    getCompanies(angular.extend({}, $scope.query, {page: page, limit: limit}));
+  };
+
+  $scope.onReorder = function (order) {
+    getCompanies(angular.extend({}, $scope.query, {order: order}));
+  };
 }]);
 app.controller("CompanyDetailCtrl", ['$scope', '$routeParams', 'Company', 'AddOwner', function($scope, $routeParams, Company, AddOwner) {
   $scope.company = Company.get({id: $routeParams.id});
